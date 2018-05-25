@@ -1,0 +1,21 @@
+clear all
+
+Nbits=30;
+Te=10;
+
+%h = modem.pskmod( 8 );
+h=comm.PSKModulator('BitInput',true, 'ModulationOrder', 8,'PhaseOffset',pi/8); 
+
+%Generer une suite binaire
+bits = randi([0 1],  Nbits,1);
+
+
+data=step(h,bits)
+
+dirac=[1 zeros(1,Te-1)];
+suite_diracs=kron(data,dirac);
+
+%plot(suite_diracs)
+
+
+
