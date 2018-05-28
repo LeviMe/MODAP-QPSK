@@ -1,0 +1,33 @@
+function [res] = demodulation(type)
+bits = randi([0 1],  300,1);
+rate=2/3;
+gamma=gamma_dvbs2(rate);
+
+if (type==1)
+    modObj=comm.PSKDemodulator('BitInput',true, 'ModulationOrder', 4,'PhaseOffset',-pi/4,...
+    'SymbolMapping','Custom','CustomSymbolMapping',[ 1,0,2,3],...
+    'DecisionMethod','Log-likelihood ratio','Variance',0.81);
+    constellation(modObj);
+	
+
+end
+if (type==2)
+    modObj=comm.PSKDemodulator('BitInput',true, 'ModulationOrder', 8,'PhaseOffset',-pi/4,...
+    'SymbolMapping','Custom','CustomSymbolMapping',[ 6,1,0,4,5,2,3,7],...
+    'DecisionMethod','Log-likelihood ratio','Variance',0.81);
+    constellation(modObj);
+    
+end
+if (type==1 || type==2)
+    res=step(modObj,bits)';
+end
+
+if (type==3) 
+    res=mod_16apsk(bits,gamma);
+end
+
+
+
+%scatterplot(res);
+%constellation(res);
+end
