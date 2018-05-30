@@ -23,25 +23,17 @@ reshape_reussi=isequal(bits,bits_decodes);
 
 
 Rate=2/3;
+%bits=randi([0 1], 200, 1);
 
+%reshape(bits,[],3)'
 %%%%%
 %%%%%% Procédure d'entrelacement à N colonnes, le nombre de bits doit 
-%%%%% être multiple de N. 
+%%%%% être 
 N=3;
 bits=randi([0,30],1,10*N);
 bits_codes=reshape(reshape(bits,[],N)',1,[]);
 bits_decodes=reshape(reshape(bits_codes,N,[])',1,[]);
 
 
-entrelacement_reussi=isequal(bits,bits_decodes);
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Data=randi([0,1],64800/2,1);
-cod=codage(2/3, Data, 1)
-
-
-
-
-
+entrelacement_reussi=isequal(bits,bits_decodes)
 
