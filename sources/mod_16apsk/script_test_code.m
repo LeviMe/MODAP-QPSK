@@ -1,4 +1,4 @@
-N = 64800;
+NBits = 64800;
 R= 2/3 ; 
 bits=1:9;
 
@@ -37,8 +37,11 @@ entrelacement_reussi=isequal(bits,bits_decodes);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Data=randi([0,1],64800/2,1);
-cod=codage(2/3, Data, 1)
+Data=randi([0,1], NBits*R ,1);
+cod=codage(2/3, Data, 1);
+llr = 1-2*cod;
+decode = decodage(R,50,llr,1);
+isequal(Data,decode)
 
 
 

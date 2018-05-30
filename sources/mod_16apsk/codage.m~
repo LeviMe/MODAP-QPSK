@@ -17,8 +17,8 @@ elseif (type == 3)
     nbColumns = 4;
 end
 
-
-bits_codes = reshape(reshape(codeword,[],nbColumns)',1,[]);
+codeword =
+%bits_codes = reshape(reshape(codeword,[],nbColumns)',1,[]);
 %reshape(codeword,[],nbColumns);
 
 
