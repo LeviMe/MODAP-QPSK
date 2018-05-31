@@ -1,0 +1,12 @@
+
+
+X=randi([0 1],200,1);
+Y=randi([0 1],200,1);
+
+
+
+
+M=[X Y];
+
+
+[a,bdistribution(M)
