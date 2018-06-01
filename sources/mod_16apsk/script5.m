@@ -19,7 +19,7 @@ codage_active=1;
  %fixé se trouve un SNR fixé.
  
  Type=["QPSK", "8PSK", "16APSK"];
- type_plage=1:2;
+ type_plage=1:3;
  SNR_plage=12:-1:2;
  trials=6;
  BerTrialTab=zeros(size(type_plage,1),size(SNR_plage,1),trials);
