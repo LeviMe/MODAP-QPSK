@@ -23,10 +23,12 @@ function [res] = modulation(bits,type,rate)
         [Constellation, BitMapping ] = DVBS2Constellation('16APSK',gamma);
         Constellation=Constellation(BitMapping+1);
         modObj = comm.GeneralQAMModulator(Constellation);
-       % scatterplot(Constellation);
+       
+        
     end
-    
-   res = step(modObj, bits)';
+
+    res = step(modObj, bits)';
+
 end
 
 

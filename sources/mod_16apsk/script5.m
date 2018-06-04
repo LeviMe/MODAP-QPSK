@@ -99,14 +99,14 @@ for indexType=type_plage
     entropieAvgTab=mean(entropieTrialTab,3);
     capaciteAvgTab= mean(capaciteTrialTab,3);
     
-%     figure();
-%     plot( SNR_plage,BerAvgTab(indexType,:));
-%     xlabel("SNR (dB)");
-%     title("BER pour une modulation "+Type(indexType));
-%     figure();
-%     plot( SNR_plage,entropieAvgTab(indexType,:));
-%     xlabel("SNR (dB)");
-%     title("Entropie H(X|Y) pour une modulation "+Type(indexType));
+    figure();
+    plot( SNR_plage,BerAvgTab(indexType,:));
+    xlabel("SNR (dB)");
+    title("BER pour une modulation "+Type(indexType));
+    figure();
+    plot( SNR_plage,entropieAvgTab(indexType,:));
+    xlabel("SNR (dB)");
+    title("Entropie H(X|Y) pour une modulation "+Type(indexType));
     figure();
     plot( SNR_plage,capaciteAvgTab(indexType,:));
     xlabel("SNR (dB)");

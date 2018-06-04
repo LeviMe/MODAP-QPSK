@@ -16,7 +16,6 @@ function y = mod_16apsk(bits,gamma)
 matx = reshape(bits,4,length(bits)/4)'; 
 mapp =  bi2de(fliplr(matx),2)';  
 symb= zeros(1,length(mapp)); 
-
 % Mappinf the values onto the correspondant constellation points 
 for i=1:length(mapp)
     [idx2,idx]= find(bitMapping == mapp(i)); 

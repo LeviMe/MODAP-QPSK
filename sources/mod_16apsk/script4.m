@@ -3,7 +3,7 @@ clear all
 Nbits=64800;
 Rate = 2/3;
 Iteration = 50;
-Type = 1; % QPSK = 1, 8PSK = 2, 16APSK = 3
+Type = 3; % QPSK = 1, 8PSK = 2, 16APSK = 3
 Te=8;
 N=10;
 Ts=N*Te;
@@ -29,7 +29,7 @@ signal_mis_en_forme=filter(filtre_RCS,1,suite_diracs);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-signal_bruite=canal( 12,signal_mis_en_forme,1, filtre_RCS);
+signal_bruite=canal( 10 ,signal_mis_en_forme,0.81, filtre_RCS);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -40,7 +40,7 @@ signal_bruite=canal( 12,signal_mis_en_forme,1, filtre_RCS);
  prelevement=offset+1:Ts:length(symboles)*(Ts)+offset; 
 
  symboles_recus=signal_recu(prelevement);
-
+ scatterplot(symboles_recus)
  llr_bits_recus=demodulation(symboles_recus,Type,Rate);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -53,8 +53,7 @@ signal_bruite=canal( 12,signal_mis_en_forme,1, filtre_RCS);
  [bits_recus,bits]
 
 % taux_d_erreur_symbole=100*(1-sum((symboles_recus==symboles))/size(bits,1))
- taux_d_erreur_binaire=100*(1-sum((bits_recus==bits))/size(bits,1))
+ taux_d_erreur_binaire=100*(1-sum((bits_recus==bits))/size(bits*Rate,1))
  
-symboles_recus;
-scatterplot(symboles_recus);
+
 
