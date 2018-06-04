@@ -1,7 +1,0 @@
-
-
-function res=entropie(M)
-    [C, prop]=distribution(M);
-    res=-prop.*log2(pro)
-    end
-end
