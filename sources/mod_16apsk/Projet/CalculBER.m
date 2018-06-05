@@ -22,17 +22,16 @@ codage_active=0;
  %BER sera une matrice qui contiendra les taux d'erreurs binaires des trois
  %modulations, chacune répartie sur une ligne différente. A une colonne
  %fixé se trouve un SNR fixé.
-
+    
+ figure()
  Type=["QPSK", "8PSK", "16APSK"];
- type_plage=2:2;
- SNR_plage=1:0.2:20;
+ legend(Type(1),Type(2),Type(3));
+ type_plage=1:3;
+ SNR_plage=1:1:25;
  trials=1;
- BerTrialTab=zeros(size(type_plage,1),size(SNR_plage,1),trials);
- capaciteTrialTab=zeros(size(type_plage,1),size(SNR_plage,1),trials);
-
 
  BerTab=zeros(size(type_plage,1),size(SNR_plage,1));
- capaciteTab=zeros(size(type_plage,1),size(SNR_plage,1));
+
 
 for indexType=type_plage
     indexSNR=0;
@@ -40,7 +39,7 @@ for indexType=type_plage
     for SNR=SNR_plage
         indexSNR=indexSNR+1
 
-         for indexTrial=1:trials
+ 
             Ordre_Modulation=2^(indexType+1);
             bits = randi([0 1],  Nbits*Rate,1);
 
@@ -76,31 +75,16 @@ for indexType=type_plage
                  bits_recus = llr_bits_recus<0;
              end
 
-             BER_calc=100*(1-sum((bits_recus==bits))/size(bits,1));
-
-             const=unique(symboles);
-             sigma = sqrt(1 / (2 * 10^(SNR/10) ));
-             HXsY=entropie_cond(symboles,symboles_recus,const,sigma);
+             BER_calc=(1-sum((bits_recus==bits))/size(bits,1));
 
              BerTab(indexType,indexSNR)= BER_calc;
-             capaciteTab(indexType,indexSNR)=log2(Ordre_Modulation)-HXsY;
-
-           % scatterplot(symboles_recus);
-         end
-         BerTrialTab(indexType,indexSNR,indexTrial)=BerTab(indexType,indexSNR);
-         capaciteTrialTab(indexType,indexSNR,indexTrial)=capaciteTab(indexType,indexSNR);
     end
 
-    BerAvgTab=mean(BerTrialTab,3);
-    capaciteAvgTab= mean(capaciteTrialTab,3);
+   
+     semilogy( SNR_plage,BerTab(indexType,:));
+     xlabel("SNR (dB)");
+     title("Calcul du BER en présence de codage");
+     
+     hold on;
 
-%     figure();
-%     plot( SNR_plage,BerAvgTab(indexType,:));
-%     xlabel("SNR (dB)");
-%     title("BER pour une modulation "+Type(indexType));
-
-    figure();
-    plot( SNR_plage,capaciteAvgTab(indexType,:));
-    xlabel("SNR (dB)");
-    title("Capacite pour une modulation "+Type(indexType));
 end

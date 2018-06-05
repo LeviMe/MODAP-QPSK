@@ -4,7 +4,7 @@
 
 clear all
 
-Nbits=300;
+Nbits=30;
 Te=8;
 N=10;
 Ts=N*Te;
@@ -49,13 +49,13 @@ signal_bruite=canal( 11,signal_mis_en_forme,1, filtre_RCS);
 
  taux_d_erreur=100*(1-sum((bits_recus==bits))/Nbits)
 
-%figure();
-%title("signal recu");
-%plot(real(signal_recu(1:length(data)*Ts+Ts/2)));
-%hold on;
-%plot(prelevement,real(signal_recu(prelevement)),'rx');
+figure();
+title("signal recu");
+plot(real(signal_recu(1:length(data)*Ts+Ts/2)));
+hold on;
+plot(prelevement,real(signal_recu(prelevement)),'rx');
 
 
-%constellation(h);
+
 symboles_recus;
 scatterplot(symboles_recus);

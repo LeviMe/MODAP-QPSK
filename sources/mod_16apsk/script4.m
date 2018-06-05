@@ -4,7 +4,7 @@ clear all
 Nbits=64800;
 Rate = 2/3;
 Iteration = 50;
-Type = 1; % QPSK = 1, 8PSK = 2, 16APSK = 3
+Type = 2; % QPSK = 1, 8PSK = 2, 16APSK = 3
 Te=8;
 N=10;
 Ts=N*Te;
@@ -30,7 +30,7 @@ signal_mis_en_forme=filter(filtre_RCS,1,suite_diracs);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-signal_bruite=canal( 12,signal_mis_en_forme,1, filtre_RCS);
+signal_bruite=canal( 16,signal_mis_en_forme,1, filtre_RCS);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

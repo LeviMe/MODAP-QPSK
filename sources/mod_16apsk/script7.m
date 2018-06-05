@@ -9,8 +9,8 @@
 
 clear all;
 
-Nbits=64800;
-Rate = 2/3;
+Nbits=3000;
+Rate = 1;
 Iteration = 50;
  % QPSK = 1, 8PSK = 2, 16APSK = 3
 Te=8;
@@ -18,7 +18,7 @@ N=10;
 Ts=N*Te;
 alpha=0.2; % plus tard 0.25 et 0.35
 
-codage_active=1;
+
 
  %*Rate
 
@@ -29,7 +29,7 @@ codage_active=1;
  Type=["QPSK", "8PSK", "16APSK"];
  type_plage=2:2;
  SNR_plage=1:1:20;
- trials=6;
+ trials=200;
  BerTrialTab=zeros(size(type_plage,1),size(SNR_plage,1),trials);
  capaciteTrialTab=zeros(size(type_plage,1),size(SNR_plage,1),trials);
 
@@ -48,13 +48,14 @@ for indexType=type_plage
             bits = randi([0 1],  Nbits*Rate,1);
             symboles=modulation(bits,indexType,Rate);
             symboles_bruite=canal( SNR,symboles,1, 1);
-
+            %scatterplot(symboles)
+            %scatterplot(symboles_bruite)
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
              const=unique(symboles);
              sigma = sqrt(1 / (2 * 10^(SNR/10) ));
-             HXsY=entropie_cond(symboles_bruite,symboles,const,sigma);
+             HXsY=entropie_cond(symboles,symboles_bruite,const,sigma);
 
              capaciteTab(indexType,indexSNR)=log2(Ordre_Modulation)-HXsY;
 
@@ -67,8 +68,8 @@ for indexType=type_plage
     capaciteAvgTab= mean(capaciteTrialTab,3);
 
 
-    figure();
-    plot( SNR_plage,capaciteAvgTab(indexType,:));
-    xlabel("SNR (dB)");
-    title("Capacite pour une modulation "+Type(indexType));
+     figure();
+     plot( SNR_plage,capaciteAvgTab(indexType,:));
+     xlabel("SNR (dB)");
+     title("Capacite pour une modulation "+Type(indexType));
 end
